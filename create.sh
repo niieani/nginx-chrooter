@@ -15,7 +15,7 @@ WEB_SERVER_GROUP='www-data'
 NGINX_INIT='/etc/init.d/nginx'
 PHP_FPM_INIT='/etc/init.d/php5-fpm'
 RUN_DIR='/shared/run'
-SCRIPTS_DIR='/root/chroot-maker-scripts'
+SCRIPTS_DIR='/root/nginx-chrooter-scripts'
 # --------------END 
 SED=`which sed`
 CURRENT_DIR=`dirname $0`
