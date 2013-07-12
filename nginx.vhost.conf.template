@@ -1,0 +1,12 @@
+server {
+	set $website "@@HOSTNAME@@";
+	set $username "@@USERNAME@@";
+	set $rootdir "htdocs";
+
+	server_name .@@HOSTNAME@@;
+	include sites-available/_defaults_php;
+
+        location / {
+                try_files $uri $uri/ /index.php$uri?$args;
+        }
+}

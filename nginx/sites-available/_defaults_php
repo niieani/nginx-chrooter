@@ -1,0 +1,29 @@
+	root /home/$username/www/$rootdir;
+	index index.php index.html index.htm;
+
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		# NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+	
+		fastcgi_pass unix:/var/run/php5-fpm_$username.sock;
+		fastcgi_index index.php;
+		include fastcgi_params_chroot;
+	}
+
+	location ~ /\.ht {
+		deny all;
+	}
+
+        location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+		expires max;
+	        log_not_found off;
+		access_log off;
+        }
+
+        location ~* \.(html|htm)$ {
+		expires 30m;
+	}
+
+	location ~* /\.(ht|git|svn) {
+		deny  all;
+	}
