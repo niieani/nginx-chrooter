@@ -24,7 +24,7 @@ pm.max_spare_servers = 3
 request_slowlog_timeout = 8s
 request_terminate_timeout = 5m
 
-security.limit_extensions = .php .php3 .php4 .php5
+security.limit_extensions = .php
 
 catch_workers_output = yes
 
