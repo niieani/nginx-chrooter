@@ -9,4 +9,4 @@
 		include fastcgi_params;
 	}
 
-	include _defaults_sane;
+	#include _defaults_sane;
