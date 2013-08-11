@@ -10,4 +10,4 @@
 		include fastcgi_params_chroot;
 	}
 
-	include _defaults_sane;
+	#include _defaults_sane;
