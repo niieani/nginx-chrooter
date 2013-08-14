@@ -15,8 +15,7 @@ WEB_SERVER_GROUP='www-data'
 NGINX_INIT='/etc/init.d/nginx'
 PHP_FPM_INIT='/etc/init.d/php5-fpm'
 RUN_DIR='/shared/run'
-SCRIPTS_DIR='/root/nginx-chrooter-scripts'
-# --------------END 
+SCRIPTS_DIR='/opt/nginx-chrooter-scripts'
 SED=`which sed`
 CURRENT_DIR=`dirname $0`
  
@@ -41,19 +40,19 @@ fi
 echo "Please specify the username for this site?"
 read USERNAME
 #HOME_DIR=$USERNAME
-adduser $USERNAME --conf=./adduser.chroot.conf
+adduser $USERNAME --conf=./config/adduser.chroot.conf
 #DOMAIN_SAFE="${DOMAIN//./_}"
 #adduser $DOMAIN_SAFE
 
 # Now we need to copy the virtual host template
 CONFIG=$NGINX_CONFIG/$USERNAME.$DOMAIN.conf
-cp $CURRENT_DIR/nginx.vhost.conf.template $CONFIG
+cp $CURRENT_DIR/templates/nginx.vhost.conf.template $CONFIG
 $SED -i "s/@@HOSTNAME@@/$DOMAIN/g" $CONFIG
 $SED -i "s/@@USERNAME@@/$USERNAME/g" $CONFIG
 
 FPMCONF="$PHP_INI_DIR/$USERNAME.$DOMAIN.conf"
 
-cp $CURRENT_DIR/pool.conf.template $FPMCONF
+cp $CURRENT_DIR/templates/pool.conf.template $FPMCONF
 
 $SED -i "s/@@USER@@/$USERNAME/g" $FPMCONF
 
@@ -70,7 +69,7 @@ ln -s $CONFIG $NGINX_SITES_ENABLED/$USERNAME.$DOMAIN.conf
 
 # add /etc
 cp -fv /etc/{host.conf,hostname,hosts,localtime,networks,nsswitch.conf,protocols,resolv.conf,services} /home/$USERNAME/etc
-cp $CURRENT_DIR/{passwd,group} /home/$USERNAME/etc
+cp $CURRENT_DIR/templates/{passwd,group} /home/$USERNAME/etc
 echo "$USERNAME:x:$(id -u $USERNAME):$(id -g $USERNAME):$DOMAIN,,,:/home/$USERNAME:/bin/false" >> /home/$USERNAME/etc/passwd
 echo "$USERNAME:x:$(id -g $USERNAME):www-data,sftp" >> /home/$USERNAME/etc/group
 
