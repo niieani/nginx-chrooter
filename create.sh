@@ -16,7 +16,6 @@ NGINX_INIT='/etc/init.d/nginx'
 PHP_FPM_INIT='/etc/init.d/php5-fpm'
 RUN_DIR='/shared/run'
 SCRIPTS_DIR='/opt/nginx-chrooter-scripts'
-# --------------END 
 SED=`which sed`
 CURRENT_DIR=`dirname $0`
  
