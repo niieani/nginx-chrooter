@@ -90,6 +90,8 @@ mount --bind /lib64 /home/$USERNAME/lib64
 mount --bind /usr /home/$USERNAME/usr
 mount --bind $RUN_DIR /home/$USERNAME/run
 
+mkdir -p /opt/nginx-chrooter-scripts
+
 # create script
 echo "#!/bin/bash
 mount --bind /bin /home/$USERNAME/bin
